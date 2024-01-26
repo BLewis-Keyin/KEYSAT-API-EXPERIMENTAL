@@ -18,11 +18,10 @@
 	</properties>
 	<dependencies>
 
-		<dependency>
-			<groupId>com.aiwiown</groupId>
-			<artifactId>aiwiown-xss-thymleaf</artifactId>
-			<version>3.0.1</version>
-		</dependency>
+	<dependency>
+		<groupId>org.thymeleaf.extras</groupId>
+		<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+	</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
 @Configuration
 @EnableWebSecurity
 public class Auth {
@@ -16,23 +17,20 @@ public class Auth {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home").permitAll()
-				.anyRequest().authenticated()
-			)
-			.formLogin((form) -> form
-				.loginPage("/login")
-				.permitAll()
-			)
-			.logout((logout) -> logout.permitAll());
+				.authorizeHttpRequests((requests) -> requests
+						.requestMatchers("/", "/home").permitAll()
+						.anyRequest().authenticated())
+				.formLogin((form) -> form
+						.loginPage("/login")
+						.permitAll())
+				.logout((logout) -> logout.permitAll());
 
 		return http.build();
 	}
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		UserDetails user =
-			 User.withDefaultPasswordEncoder()
+		UserDetails user = User.withDefaultPasswordEncoder()
 				.username("user")
 				.password("password")
 				.roles("USER")

@@ -1,16 +1,29 @@
 package KEYSAT;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class API {
 
     @GetMapping("/")
-    public String sayHello() {
-        return "KEYSAT APP";
+    public String keysat() {
+        return "KEYSAT";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
+    @GetMapping("/logout")
+    public String logout() {
+        return "logout";
+    }
+
+    @GetMapping("/secret")
+    public String secret() {
+        return "secret message that you can only see when logged in";
+    }
 
     }
