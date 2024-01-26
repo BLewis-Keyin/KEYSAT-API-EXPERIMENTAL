@@ -4,7 +4,7 @@ Security Configuration (Auth.java)
 
     Endpoints:
         Public: "/", "/home", "/login"
-        Secured: All others
+        Secured: "/secret" *USER ROLE*
     Authentication:
         Type: Form-based
         Page: "/login"
