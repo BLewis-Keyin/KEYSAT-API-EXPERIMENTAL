@@ -23,7 +23,7 @@ public class API {
 
     @GetMapping("/secret")
     public String secret() {
-        return "secret message that you can only see when logged in";
+        return "secret";
     }
 
     }

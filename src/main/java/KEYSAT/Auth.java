@@ -19,6 +19,7 @@ public class Auth {
 		http
 				.authorizeHttpRequests((requests) -> requests
 						.requestMatchers("/", "/home").permitAll()
+						.requestMatchers("/secret").hasRole("USER")
 						.anyRequest().authenticated())
 				.formLogin((form) -> form
 						.loginPage("/login")
