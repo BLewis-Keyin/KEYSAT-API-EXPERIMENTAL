@@ -13,7 +13,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -31,12 +31,12 @@ public class User implements UserDetails {
 
     // Getter method for id
     public Long getId() {
-        return id;
+        return user_id;
     }
 
     // Setter method for id
     public void setId(Long id) {
-        this.id = id;
+        this.user_id = id;
     }
 
     // Setter method for username

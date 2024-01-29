@@ -3,9 +3,11 @@ package KEYSAT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,11 +37,12 @@ public class Auth {
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	
+		// This bean indicates that passwords are not encoded
+		return NoOpPasswordEncoder.getInstance();
 	}
 
 	@Bean
+	
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 				.authorizeHttpRequests((requests) -> requests
@@ -56,7 +59,15 @@ public class Auth {
 
 @Bean
 public UserDetailsService userDetailsService() {
-    JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-    return manager;
+	JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+	return manager;
 }
+
+  @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+            .dataSource(dataSource)
+            .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+            .authoritiesByUsernameQuery("SELECT username, authority FROM user_roles WHERE username=?");
+    }
 }

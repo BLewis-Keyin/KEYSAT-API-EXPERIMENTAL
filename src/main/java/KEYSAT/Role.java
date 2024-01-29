@@ -7,17 +7,17 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long role_id;
 
     private String name;
 
     // Getters and setters
     public Long getId() {
-        return id;
+        return role_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.role_id = id;
     }
 
     public String getName() {
@@ -28,5 +28,15 @@ public class Role {
         this.name = name;
     }
 
-    
+    @Column(name = "authority")
+    private String authority;
+
+    // Constructors
+    public Role() {
+    }
+
+    public Role(String username, String authority) {
+        this.name = username;
+        this.authority = authority;
+    }
 }
