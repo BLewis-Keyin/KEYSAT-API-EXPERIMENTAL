@@ -30,5 +30,5 @@ public class AttendanceRecordController {
         return ResponseEntity.ok(attendanceRecordRepository.save(attendanceRecord));
     }
 
-    // Add methods for PUT, DELETE, etc.
+
 }
